@@ -29,7 +29,7 @@ function CadastroCategoria() {
   }
 
   useEffect(() => {
-    const URL_TOP = 'http://localhost:8000/categorias';
+    const URL_TOP = 'https://aluraflix-japa.herokuapp.com/categorias';
 
     fetch(URL_TOP)
       .then(async (respostaDoServidor) => {
