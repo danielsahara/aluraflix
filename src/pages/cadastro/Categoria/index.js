@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import useForm from '../../../hooks/useForm';
 
 function CadastroCategoria() {
   const [categorias, setCategorias] = useState([]);
@@ -13,20 +14,7 @@ function CadastroCategoria() {
     cor: '',
   };
 
-  const [values, setValues] = useState(valoresIniciais);
-
-  function setValue(chave, valor) {
-    setValues({
-      ...values,
-      [chave]: valor,
-    });
-  }
-
-  function handleChange(infosDoEvento) {
-    const { getAttribute, value } = infosDoEvento.target;
-    setValue(infosDoEvento.target.getAttribute('name'), infosDoEvento.target.value);
-    // setValue(getAttribute('name'), value);
-  }
+  const { handleChange, values, clearForm } = useForm(valoresIniciais);
 
   useEffect(() => {
     const URL_TOP = window.location.hostname.includes('localhost') ? 'http://localhost:8000/categorias' : 'https://aluraflix-japa.herokuapp.com/categorias';
@@ -55,7 +43,7 @@ function CadastroCategoria() {
           values,
         ]);
 
-        setValues(valoresIniciais);
+        clearForm();
       }}
       >
         <FormField
